@@ -272,7 +272,7 @@
 (setq exec-path (append '("/Library/TeX/texbin") exec-path))
 
 
-(setq org-latex-create-formula-image-program 'dvisvgm)
-(setq org-preview-latex-default-process 'dvisvgm)
+; (setq org-latex-create-formula-image-program 'dvisvgm)
+; (setq org-preview-latex-default-process 'dvisvgm)
 (setq org-startup-with-latex-preview t)
 

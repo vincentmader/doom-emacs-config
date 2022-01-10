@@ -23,7 +23,8 @@
        company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
+       ;;ivy               ; a search engine for love and life
+       vertico           ; the search engine of the future
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -31,15 +32,14 @@
        doom-dashboard    ; a nifty splash screen for Emacs
        ;; doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;(emoji +unicode)  ; 🙂
-       ;;fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
-       ;;ligatures         ; ligatures and symbols to make your code pretty again
+       ligatures         ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash         ; blink cursor line after big motions
-       ;;neotree           ; a project drawer, like NERDTree for vim
+       neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;tabs              ; a tab bar for Emacs
@@ -67,6 +67,7 @@
 
        :emacs
        dired             ; making dired pretty [functional]
+       ;; TODO (dired +ranger)
        electric          ; smarter, keyword-based electric-indent
        ;;ibuffer         ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
@@ -76,7 +77,7 @@
        ;;eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       ;;vterm             ; the best terminal emulation in Emacs
+       vterm             ; the best terminal emulation in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -93,7 +94,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
-       ;;lsp
+       ;;lsp               ; M-x vscode
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -120,6 +121,7 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        ;;data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
+       ;;dhall
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
@@ -131,15 +133,15 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-       ;;(haskell +dante)  ; a language that's lazier than I am
+       ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       ;;json              ; At least it ain't XML
+       json              ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       ;;latex             ; writing papers in Emacs has never been so fun
+       latex             ; writing papers in Emacs has never been so fun
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
@@ -147,18 +149,21 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       org               ; organize your plain life in plain text
+       (org                ; organize your plain life in plain text
+        +pretty
+        +journal           ; journaling
+        +present)           ; emacs for presentations
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       ;;python            ; beautiful is better than ugly
+       python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;(scheme +guile)   ; a fully conniving family of lisps
        sh                ; she sells {ba,z,fi}sh shells on the C xor
@@ -171,12 +176,12 @@
        ;;zig               ; C, but simpler
 
        :email
-       ;;(mu4e +gmail)
+       ;;(mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
        :app
-       ;;calendar
+       calendar
        ;;emms
        ;;everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
@@ -186,4 +191,84 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+
+
+
+
+
+
+;; (setq fancy-splash-image "~/.doom.d/black-hole.png")
+
+; -----------------------------------------------------------------------------
+; (require 'package)
+; (add-to-list 'package-archives
+;              '("melpa-stable" . "https://stable.melpa.org/packages/"))
+; (package-initialize)
+
+
+; -----------------------------------------------------------------------------
+;(require 'ox-latex)
+;;(add-to-list 'org-latex-packages-alist '("" "minted"))
+;(setq org-latex-listings 'minted)
+
+; (setq org-superstar-prettify-item-bullets nil)
+
+;(setq org-latex-pdf-process
+;      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+; -----------------------------------------------------------------------------
+; v- not working
+;; set line spacing to 10%
+; (setq line-spacing 0.1)
+
+; (setq solaire-global-mode nil)
+; (after! solaire-mode (solaire-global-mode -1))
+
+(setq org-latex-to-pdf-process (list "latexmk -f -pdf %f"))
+; (setq org-latex-create-formula-image-program 'dvipng)  TODO use this on arch
+(setq org-latex-create-formula-image-program 'dvisvgm)
+
+; (after! org (plist-put org-format-latex-options :scale 2.75))  TODO use this on arch
+(after! org (plist-put org-format-latex-options :scale 3.5))
+; fix color handling in org-preview-latex-fragment (TODO: not working, install xcolor?)
+
+; (solaire-global-mode +1)
+; (defun +org-update-latex-preview-background-color (&rest _)
+;     (setq-default
+;     org-format-latex-options
+;         (plist-put org-format-latex-options
+;             :background
+;             (face-attribute (or (cadr (assq 'default face-remapping-alist))
+;                 'default)
+;             :background nil t))))
+; (advice-add #'load-theme :after #'+org-update-latex-preview-background-color)
+; (add-hook 'solaire-mode-hook #'+org-update-latex-preview-background-color)
+
+; (let ((dvipng--plist (alist-get 'dvipng org-preview-latex-process-alist)))
+;     (plist-put dvipng--plist :use-xcolor t)
+;     (plist-put dvipng--plist :image-converter '("dvipng -D %D -T tight -o %O %f"))
+; )
+
+;; (after! org (plist-put org-format-latex-options :background "#222222"))
+;; (after! org (plist-put org-format-latex-options :foreground auto))
+; (after! org (plist-put org-format-latex-options :background "#000000"))
+; (after! org (plist-put org-format-latex-options :foreground "#FFFFFF"))
+; (setq org-format-latex-options (plist-put org-format-latex-options :background auto))
+; (setq org-format-latex-options (plist-put org-format-latex-options :foreground auto))
+; (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
+
+
+
+
+;; needed for macOS support   TODO: works on arch?
+(package! gitconfig-mode
+	  :recipe (:host github :repo "magit/git-modes"
+			 :files ("gitconfig-mode.el")))
+(package! gitignore-mode
+	  :recipe (:host github :repo "magit/git-modes"
+			 :files ("gitignore-mode.el")))
 

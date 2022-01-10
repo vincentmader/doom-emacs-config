@@ -154,6 +154,10 @@
 ;    :config
 ;    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+(setq
+    org-superstar-headline-bullets-list '("◉" "○")
+) ; "⁖" "◉" "○" "✸" "✿"
+
 
 ;; Org-Checkbox Symbols
 ;; ----------------------------------------------------------------------------

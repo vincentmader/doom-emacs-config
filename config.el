@@ -126,11 +126,14 @@
 ;; Startup-Dashboard
 ;; ----------------------------------------------------------------------------
 
+(setq fancy-splash-image "~/.config/doom/media/black-hole.png")
+
 (setq +doom-dashboard-functions
-      '(; doom-dashboard-widget-banner
+      '(doom-dashboard-widget-banner
         doom-dashboard-widget-shortmenu
         doom-dashboard-widget-loaded
-        doom-dashboard-widget-footer))
+        ;doom-dashboard-widget-footer
+      ))
 
 
 ;; Themes
@@ -278,5 +281,10 @@
 
 ; (setq org-latex-create-formula-image-program 'dvisvgm)
 ; (setq org-preview-latex-default-process 'dvisvgm)
-(setq org-startup-with-latex-preview t)
+; (setq org-startup-with-latex-preview t)
+(after! org (plist-put org-format-latex-options :scale 1.75))
+
+;; bigger latex fragment
+; (plist-put org-format-latex-options :scale 1.5)
+
 

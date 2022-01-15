@@ -187,7 +187,3 @@
        ;;literate
        (default +bindings +smartparens))
 
-
-
-
-; (plist-put org-format-latex-options :scale 2)

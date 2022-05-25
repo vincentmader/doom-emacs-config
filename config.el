@@ -38,6 +38,10 @@
 ;; auto-refresh dired on file change
 (add-hook 'dired-mode-hook 'auto-revert-mode)  ;; TODO: make sure this works
 
+;; Notifications on macOS                         TODO make os-specific
+;; ----------------------------------------------------------------------------
+(defvar terminal-notifier-command (executable-find "terminal-notifier") "The path to terminal-notifier.")
+;; (setq exec-path (append '("/Users/vinc/bin" "/usr/local/bin" "/usr/local/sbin") exec-path))
 
 ;; Projects
 ;; ----------------------------------------------------------------------------
@@ -46,6 +50,8 @@
 (projectile-add-known-project "~/code/mader.xyz")
 (projectile-add-known-project "~/code/auto-rice-scripts")
 (projectile-add-known-project "~/docs/uni")
+
+(projectile-add-known-project "~/docs/Learning & Notes/Notes/")
 
 
 ;; FONTS
@@ -83,13 +89,35 @@
 ;; Org-Agenda & TODOs
 ;; ----------------------------------------------------------------------------
 
+;; (setq org-agenda-inhibit-startup nil)
+;; (setq org-agenda-dim-blocked-tasks nil)
+
+;; how many days should be included in the agenda?
+(setq org-agenda-span 1)
+
+;; start the agenda today (default: last Monday)
+(setq org-agenda-start-day "+0d")
+(setq org-agenda-start-on-weekday nil)
+
+;; ;; Set default column view headings: Task Total-Time Time-Stamp
+;; (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+
 ;; recursively add all files in ~/org/ to org-agenda
-; (setq org-agenda-files (directory-files-recursively "~/org/" "\\.org$"))
+(setq org-agenda-files (directory-files-recursively "~/org/" "\\.org$"))
 ;; -> but exclude journal files!
-(setq org-agenda-files
-      (seq-filter (lambda(x) (not (string-match "/journal/"(file-name-directory x))))
-                  (directory-files-recursively "~/org/" "\\.org$")
-                  ))
+    (setq org-agenda-files
+          (seq-filter (lambda(x) (not (string-match "_all"(file-name-directory x))))
+                      (directory-files-recursively "~/org/" "\\.org$")
+                      ))
+;; (setq org-agenda-files
+;;       (seq-filter (lambda(x) (not (string-match "/journal/"(file-name-directory x))))
+;;                   (directory-files-recursively "~/org/" "\\.org$")
+;;                   ))
+(remove "/base/Journal/" org-agenda-files)
+(remove "/library/Archive" org-agenda-files)
+(remove "/src/" org-agenda-files)
+(remove "/library/Books/" org-agenda-files)
+(remove "/_old/" org-agenda-files)
 
 ;; TODO keywords
 ;; (after! org (setq org-todo-keywords
@@ -282,9 +310,82 @@
 ; (setq org-latex-create-formula-image-program 'dvisvgm)
 ; (setq org-preview-latex-default-process 'dvisvgm)
 ; (setq org-startup-with-latex-preview t)
-(after! org (plist-put org-format-latex-options :scale 1.75))
+(after! org (plist-put org-format-latex-options :scale 2.0))
 
 ;; bigger latex fragment
-; (plist-put org-format-latex-options :scale 1.5)
+;; (plist-put org-format-latex-options :scale 1.5)
 
 
+
+;; (setq org-agenda-custom-commands
+;;     '(("t" "Agenda for today" agenda ""
+;;         ((org-agenda-overriding-header "Today's agenda")
+;;          (org-agenda-span 'day)
+;;         ))))
+
+;; (add-to-list 'org-agenda-custom-commands
+;;              '("b" agenda "Today's Deadlines"
+;;                ((org-agenda-span 'day)
+;;                 (org-agenda-skip-function '(org-agenda-skip-deadline-if-not-today))
+;;                 (org-agenda-entry-types '(:deadline))
+;;                 (org-agenda-overriding-header "Today's Deadlines "))))
+
+
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((emacs-lisp . t) ;; Other languages
+;;    (shell . t)
+;;    ;; Python & Jupyter
+;;    (python . t)
+;;    (jupyter . t)))
+
+;; (setq org-latex-listings t)
+;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+;; (setq org-latex-listings 'minted)
+
+
+;; (require 'org)
+;; (require 'ox-latex)
+;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+;; (setq org-latex-listings 'minted)
+
+;; (setq org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+;; (setq org-src-fontify-natively t)
+
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((R . t)
+;;    (latex . t)))
+
+
+
+;; (add-to-list 'org-latex-packages-alist '("" "listingsutf8"))
+
+;; (setq org-src-fontify-natively t)
+
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((R . t)
+;;    (latex . t)))
+
+
+;; (require 'org)
+;; (require 'ox-latex)
+;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+;; (setq org-latex-listings 'minted)
+
+;; (setq org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+;; (setq org-src-fontify-natively t)
+
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((R . t)
+;;    (latex . t)))

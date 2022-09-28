@@ -2,10 +2,10 @@
 ;;; $DOOMDIR/packages.el
 
 
-;; To install a package with Doom you must declare them here and run 'doom sync'
-;; on the command line, then restart Emacs for the changes to take effect -- or
-;; use 'M-x doom/reload'.
-
+;; To install a package with Doom you must declare them here, &
+;;   run 'doom sync' on the command line, then
+;; restart Emacs for the changes to take effect
+;;   (or use 'M-x doom/reload').
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
@@ -60,3 +60,9 @@
 	  :recipe (:host github :repo "magit/git-modes"
 			 :files ("gitignore-mode.el")))
 
+
+
+
+(package! jupyter)
+
+(package! pretty-symbols)

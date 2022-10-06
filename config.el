@@ -166,11 +166,11 @@
    (setq org-todo-keyword-faces '(
        ("TODO" . "orange")
        ("NEXT" . "#ae1703")
-       ("PROJ" . "blue")
-       ("WAIT" . "#3f5a62")
-       ("HOLD" . "#3f5a62")
-       ("DONE" . "#849902")
-       ("CANC" . "#849902")
+       ("PROJ" . "#849902")
+       ("WAIT" . "gray")
+       ("HOLD" . "gray")
+       ("DONE" . "#3f5a62")
+       ("CANC" . "#3f5a62")
        ("SDMB" . "gray")
    ))
 ;; -> TODO The code above doesn't do anything -> Fix! (??)
@@ -218,13 +218,15 @@
 ;; Specify appearance of agenda.
 ;; ----------------------------------------------------------------------------
 ;; Specify how many Days should be included in the Agenda.
-   (setq org-agenda-span 99999)
+   (setq org-agenda-span 28)
 ;;                    TODO ^ this is not doing anything atm
 ;; ----------------------------------------------------------------------------
 
 ;; Specify what files should be loaded into agenda.
 ;; ----------------------------------------------------------------------------
 ;; Define list of agenda-files.
+;;
+;; NOTE: When adding something here, also add `#agenda` to the top of the file!
    (after! org (setq org-agenda-files '(
       "~/org/Chores/Bureaucracy/Bureaucracy.org"
       "~/org/Chores/Cooking/Cooking.org"
@@ -233,12 +235,16 @@
       "~/org/Chores/Shopping/Shopping.org"
       "~/org/Chores/Getting Things Done/GTD.org"
       "~/org/Chores/Getting Things Done/Journal/People/People.org"
+      "~/org/Chores/Getting Things Done/Journal/Journal by Year/2022.org"
       "~/org/Chores/Getting Things Done/Routines/Routines.org"
       "~/org/Chores/Health/Health.org"
       "~/org/Inbox/Inbox.org"
       "~/org/Index.org"
-      "~/org/Projects/All Projects/auto-rice-scripts.nosync/Developer Environment.org"
-      "~/org/Projects/All Projects/DPSG/Aktionen/DPSG-Aktionen.org"
+      "~/org/Projects/All Projects/dev - auto-rice-scripts.nosync/Developer Environment.org"
+      "~/org/Projects/All Projects/dev - chronos-stats/chronos.org"
+      "~/org/Projects/All Projects/dev - mader.xyz/mxyz.org"
+      "~/org/Projects/All Projects/dev - sono app/xwm.org"
+      "~/org/Projects/All Projects/DPSG/Aktionen/Aktionen.org"
       "~/org/Projects/All Projects/DPSG/DPSG Kirchheim/DPSG Kirchheim.org"
       "~/org/Projects/All Projects/DPSG/DPSG-Ebenen/DPSG-Ebenen.org"
       "~/org/Projects/All Projects/DPSG/DPSG.org"
@@ -247,14 +253,10 @@
       "~/org/Projects/All Projects/DPSG/Pfadi-Stufe/DPSG-Pfadis.org"
       "~/org/Projects/All Projects/DPSG/Stammes-Vorstand/DPSG-StaVo.org"
       "~/org/Projects/All Projects/DPSG/Vereins-Vorsitz/DPSG-Verein.org"
-      "~/org/Projects/All Projects/University/University.org"
-      "~/org/Projects/All Projects/University/sem_13/M.Sc. Thesis/msc_thesis.org"
-      "~/org/Projects/All Projects/University/sem_13/M.Sc. Oral Exam/M.Sc. Oral Exam.org"
-      "~/org/Projects/All Projects/chronos-stats/chronos.org"
-      "~/org/Projects/All Projects/mader.xyz/mxyz.org"
-      "~/org/Projects/All Projects/write app - x-with-me/xwm.org"
+      "~/org/Projects/All Projects/edu - University/University.org"
+      "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Thesis/msc_thesis.org"
+      "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Oral Exam/msc_exam.org"
       "~/org/Projects/Projects.org"
-      "~/org/Review/Journal/Journal by Year/2022.org"
    )))
 ;; ----------------------------------------------------------------------------
 

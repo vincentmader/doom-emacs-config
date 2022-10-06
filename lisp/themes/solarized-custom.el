@@ -53,7 +53,7 @@ Can be an integer to determine the exact padding."
   "A dark theme inspired by VS Code Solarized Dark"
 
   ;; name        default   256       16
-  ((bg         '("#111111" "#111111" "white"       ))
+  ((bg         '("#000000" "#000000" "white"       ))
   ; ((bg         '("#002b36" "#002b36" "brightwhite" ))
    (fg         (if doom-solarized-dark-brighter-text
                    '("#BBBBBB" "#BBBBBB" "brightwhite")
@@ -64,13 +64,13 @@ Can be an integer to determine the exact padding."
    ;; or region), especially when paired with the `doom-darken', `doom-lighten',
    ;; and `doom-blend' helper functions.
    ; (bg-alt     '("#00212B" "#00212B" "white"       ))
-   (bg-alt     '("#111111" "#111111" "white"       )) 
+   (bg-alt     '("#000000" "#000000" "white"       )) 
    (fg-alt     '("#657b83" "#657b83" "white"       ))
 
    ;; These should represent a spectrum from bg to fg, where base0 is a starker
    ;; bg and base8 is a starker fg. For example, if bg is light grey and fg is
    ;; dark grey, base0 should be white and base8 should be black.
-   (base0      '("#111111" "#111111" "black"       ))
+   (base0      '("#000000" "#000000" "black"       ))
    (base1      '("#03282F" "#03282F" "brightblack" ))
    (base2      '("#00212C" "#00212C" "brightblack" ))
    (base3      '("#13383C" "#13383C" "brightblack" ))

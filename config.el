@@ -1,7 +1,7 @@
 ;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; NOTE: no need to run 'doom sync' after modifying this file!
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Here are some additional functions/macros that will help you configure Doom:
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
@@ -17,9 +17,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; ============================================================================
-;;                               EMACS - GENERAL                              |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                            EMACS - GENERAL                               ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Add Personal Identification Information.
    (setq user-full-name "Vincent C. Mader"
@@ -28,12 +28,17 @@
 ;; Disable Emacs' quit-prompt.
    (setq confirm-kill-emacs nil)
 
-;; ============================================================================
-;;                              EMACS - APPEARANCE                            |
-;; ============================================================================
+;; Auto-save on insert-mode exit.
+   (add-hook 'evil-insert-state-exit-hook (
+     lambda () (call-interactively #'save-buffer)
+   ))
+
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                           EMACS - APPEARANCE                             ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Customize Emacs startup dashboard.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Add background image for startup dashboard.
    (setq fancy-splash-image "~/.config/doom/media/black-hole.png")
 ;; Specify what widgets to show on startup dashboard.
@@ -43,10 +48,9 @@
        doom-dashboard-widget-loaded
       ;doom-dashboard-widget-footer
    ))
-;; ----------------------------------------------------------------------------
 
 ;; Specify theme.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Choose dark solarized theme.
    (setq doom-theme 'doom-solarized-dark)
 ;; Other options:                                             (incomplete list)
@@ -58,10 +62,9 @@
 ;; - doom-city-lights
 ;; - doom-one                                                   (default theme)
 ;; - doom-vibrant
-;; ----------------------------------------------------------------------------
 
 ;; Specify fonts.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Doom exposes 5 (optional) variables for controlling fonts in Doom.
 ;; Here are the three important ones:
 ;; + `doom-font'
@@ -73,38 +76,34 @@
    (setq doom-font (font-spec :family "Hack Nerd Font" :size 18))
  ; (setq doom-font (font-spec :family "Hack Regular" :size 18))
  ; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light) doom-variable-pitch-font (font-spec :family "sans" :size 13))
-;; ----------------------------------------------------------------------------
 
 ;; Configure text display.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Specify default line spacing.
    (setq-default line-spacing 0.15)
 ;; Activate relative line numbers.
    (setq display-line-numbers-type 'relative)  ; NOTE: or 'nil
-;; ----------------------------------------------------------------------------
 
-;; ============================================================================
-;;                             EMACS - NAVIGATION                             |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                           EMACS - NAVIGATION                             ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Setup Emacs' dired.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Auto-refresh dired on file change.
    (add-hook 'dired-mode-hook 'auto-revert-mode)    ;TODO: make sure this works
-;; ----------------------------------------------------------------------------
 
 ;; Setup Emacs' neotree.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Specify width of neotree window.
    (setq neo-window-width 32)
-;; ----------------------------------------------------------------------------
 
-;; ============================================================================
-;;                              EMACS - JUPYTER                               |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                             EMACS - JUPYTER                              ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Define languages.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
    (org-babel-do-load-languages
     'org-babel-load-languages
     '((emacs-lisp . t) ;; Other languages
@@ -112,44 +111,40 @@
       (python . t)
       (jupyter . t)
       (jupyter-python . t)))
-;; ----------------------------------------------------------------------------
 
-;; ============================================================================
-;;                               EMACS - LATEX                                |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                              EMACS - LaTeX                               ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Configure LaTeX fragment-preview.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Increase fragment snize.
    (after! org (plist-put org-format-latex-options :scale 2.0))
 ;; Configure fragment colors.
    (add-to-list 'default-frame-alist '(background-color . "#000000"))
    (add-to-list 'default-frame-alist '(foreground-color . "#FFFFFF"))
 ;;                                     TODO ^ not working (e.g. foreground red)
-;; ----------------------------------------------------------------------------
 
 ;; Configure LaTeX snippet-preview on macOS.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
    (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
    (setq exec-path (append '("/Library/TeX/texbin") exec-path))
-;; ----------------------------------------------------------------------------
 
-;; ============================================================================
-;;                             EMACS - ORG-MODE                               |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                            EMACS - ORG-MODE                              ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Setup location of org on disk.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Define path to org-files.                (sym-link in home-dir to elsewhere)
    (setq org-directory "~/org/")
 ;; Define path to some of my projects.
    (projectile-add-known-project "~/.config")
    (projectile-add-known-project "~/org/Projects/All Projects/University")
    (projectile-add-known-project "~/org/Projects/All Projects/mader.xyz")
-;; ----------------------------------------------------------------------------
 
 ;; Define custom org to-do keywords.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Specify collection of org-todo keywords.
    (after! org (setq org-todo-keywords '((sequence
        "TODO(t)"
@@ -173,24 +168,21 @@
        ("CANC" . "#3f5a62")
        ("SDMB" . "gray")
    ))
-;; -> TODO The code above doesn't do anything -> Fix! (??)
-;; ----------------------------------------------------------------------------
 
 ;; Setup Emacs' journaling functionality.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Define org-journal template.                           NOTE: not used a.t.m.
    (setq org-journal-date-prefix "#+title: "
          org-journal-time-prefix "* "
          org-journal-date-format "%A, %B %d. %Y"
          org-journal-file-format "%Y-%m-%d.org")
-;; ----------------------------------------------------------------------------
 
-;; ============================================================================
-;;                           ORG-MODE - APPEARANCE                            |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                          ORG-MODE - APPEARANCE                           ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Configure org-text display.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Specify default folding level.            TODO Unfold two levels by default.
    (setq org-startup-folded t)
 ;; Hide emphasis markup                (e.g. /.../ for italics, *...* for bold)
@@ -198,10 +190,9 @@
 ;; Define custom headline bullet symbols.
    (setq org-superstar-headline-bullets-list
          '("◉" "○")) ; "⁖" "◉" "○" "✸" "✿"
-;; ----------------------------------------------------------------------------
 
 ;; Prettify checkbox symbols.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Redefine symbols.
    (add-hook 'org-mode-hook (lambda ()
      "Beautify Org Checkbox Symbol"
@@ -209,21 +200,19 @@
      (push '("[X]" . "✓" ) prettify-symbols-alist)
      (push '("[-]" . "❍" ) prettify-symbols-alist)
      (prettify-symbols-mode)))
-;; ----------------------------------------------------------------------------
 
-;; ============================================================================
-;;                             ORG-MODE - AGENDA                              |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                             ORG-MODE - AGENDA                            ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Specify appearance of agenda.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Specify how many Days should be included in the Agenda.
    (setq org-agenda-span 28)
 ;;                    TODO ^ this is not doing anything atm
-;; ----------------------------------------------------------------------------
 
 ;; Specify what files should be loaded into agenda.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; Define list of agenda-files.
 ;;
 ;; NOTE: When adding something here, also add `#agenda` to the top of the file!
@@ -240,37 +229,39 @@
       "~/org/Chores/Health/Health.org"
       "~/org/Inbox/Inbox.org"
       "~/org/Index.org"
-      "~/org/Projects/All Projects/dev - auto-rice-scripts.nosync/Developer Environment.org"
+      "~/org/Projects/All Projects/dev - auto-rice-scripts.nosync/DevEnv.org"
       "~/org/Projects/All Projects/dev - chronos-stats/chronos.org"
       "~/org/Projects/All Projects/dev - mader.xyz/mxyz.org"
       "~/org/Projects/All Projects/dev - sono app/xwm.org"
-      "~/org/Projects/All Projects/DPSG/Aktionen/Aktionen.org"
-      "~/org/Projects/All Projects/DPSG/DPSG Kirchheim/DPSG Kirchheim.org"
-      "~/org/Projects/All Projects/DPSG/DPSG-Ebenen/DPSG-Ebenen.org"
-      "~/org/Projects/All Projects/DPSG/DPSG.org"
-      "~/org/Projects/All Projects/DPSG/Haus/DPSG-Haus.org"
-      "~/org/Projects/All Projects/DPSG/Leitungs-Runde/DPSG-LR.org"
-      "~/org/Projects/All Projects/DPSG/Pfadi-Stufe/DPSG-Pfadis.org"
-      "~/org/Projects/All Projects/DPSG/Stammes-Vorstand/DPSG-StaVo.org"
-      "~/org/Projects/All Projects/DPSG/Vereins-Vorsitz/DPSG-Verein.org"
+      "~/org/Projects/All Projects/msc - DPSG/Aktionen/DPSG-Aktionen.org"
+      "~/org/Projects/All Projects/msc - DPSG/DPSG Kirchheim/DPSG Kirchheim.org"
+      "~/org/Projects/All Projects/msc - DPSG/DPSG-Ebenen/DPSG-Ebenen.org"
+      "~/org/Projects/All Projects/msc - DPSG/DPSG.org"
+      "~/org/Projects/All Projects/msc - DPSG/Haus/DPSG-Haus.org"
+      "~/org/Projects/All Projects/msc - DPSG/Leitungs-Runde/DPSG-LR.org"
+      "~/org/Projects/All Projects/msc - DPSG/Pfadi-Stufe/DPSG-Pfadis.org"
+      "~/org/Projects/All Projects/msc - DPSG/Stammes-Vorstand/DPSG-StaVo.org"
+      "~/org/Projects/All Projects/msc - DPSG/Vereins-Vorsitz/DPSG-Verein.org"
       "~/org/Projects/All Projects/edu - University/University.org"
+      "~/org/Projects/All Projects/edu - University/sem_06/Introduction to Computational Physics/CompPhys.org"
+      "~/org/Projects/All Projects/edu - University/sem_08/Fundamentals of Simulation Methods/FSim.org"
+      "~/org/Projects/All Projects/edu - University/sem_12/Computational Astrophysics/CompAstro.org"
       "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Thesis/msc_thesis.org"
       "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Oral Exam/msc_exam.org"
+      "~/org/Projects/All Projects/wrk - Tutor @PAP/PAP-Tutor.org"
       "~/org/Projects/Projects.org"
    )))
-;; ----------------------------------------------------------------------------
 
-;; ============================================================================
-;;                         ORG-MODE - NOTIFICATIONS                           |
-;; ============================================================================
+;; ╔══════════════════════════════════════════════════════════════════════════╗
+;; ║                         ORG-MODE - NOTIFICATIONS                         ║
+;; ╚══════════════════════════════════════════════════════════════════════════╝
 
 ;; Setup notifications on macOS.                      TODO Make OS-independent.
-;; ----------------------------------------------------------------------------
+;; ────────────────────────────────────────────────────────────────────────────
 ;; TODO Get this to work.
    (defvar terminal-notifier-command
      (executable-find "terminal-notifier") "The path to terminal-notifier.")
 ;; (setq exec-path (append '("/Users/vinc/bin" "/usr/local/bin" "/usr/local/sbin") exec-path))
-;; ----------------------------------------------------------------------------
 
 
 
@@ -289,7 +280,6 @@
 
 
 
-;; ----------------------------------------------------------------------------
 
 ;; start the agenda today (default: last Monday)
 ;; (setq org-agenda-start-day "+0d")
@@ -430,22 +420,6 @@
 ;;   (setq org-fancy-priorities-list '("!!", "!", "!")))
 
 
-;; (setq org-todo-keyword-faces
-;;       '(("TODO" . org-warning)
-;;         ("STARTED" . "yellow")
-;;         ("CANCELED" . (:foreground "blue" :weight bold))
-;;         ("WAITING" . "#222222")
-;;         ("DONE" . "#222222")
-;;         ;; ("PROJ" . "yellow")
-;;         ))
-
-
-
-;; bigger latex fragment
-;; (plist-put org-format-latex-options :scale 1.5)
-
-
-
 ;; (setq org-agenda-custom-commands
 ;;     '(("t" "Agenda for today" agenda ""
 ;;         ((org-agenda-overriding-header "Today's agenda")
@@ -525,6 +499,3 @@
 ;       org-latex-pdf-process
 ;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 ;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
-
-

@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
 import os
+import sys
+
+PLATFORM = sys.platform
+if PLATFORM == "linux2":
+    PATH_TO_EMACS_EXECUTABLE = "/usr/local/bin/emacs"
+elif PLATFORM == "darwin":
+    PATH_TO_EMACS_EXECUTABLE = "/opt/homebrew/bin/emacs"
+else:
+    raise Exception(f"Setup-script not implemented for OS {PLATFORM}")
 
 HOME = os.environ["HOME"]
 PATH_TO_FILE = f"{HOME}/Library/LaunchAgents/gnu.emacs.daemon.plist"
-CONTENT_OF_FILE = """\
+CONTENT_OF_FILE = f"""\
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -13,7 +22,7 @@ CONTENT_OF_FILE = """\
   <string>gnu.emacs.daemon</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/usr/local/bin/emacs</string>
+    <string>{PATH_TO_EMACS_EXECUTABLE}</string>
     <string>--daemon</string>
   </array>
  <key>RunAtLoad</key>
@@ -29,6 +38,7 @@ with open(PATH_TO_FILE, "w", encoding="utf-8") as fp:
 
 # Setup auto-starting of Emacs daemon on login.
 # Note: Replace `load` with `unload` to disable.
+os.system(f"launchctl unload -w {PATH_TO_FILE}")
 os.system(f"launchctl load -w {PATH_TO_FILE}")
 
 # Note: See here

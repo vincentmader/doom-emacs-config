@@ -284,4 +284,4 @@
 ;;         ((yant/str-to-glyph "☠D") org-specific "\\<DEADLINE:" (org-mode))
 ;;         ((yant/str-to-glyph "◴S") org-specific "\\<SCHEDULED:" (org-mode))))))
 
-(setq org-latex-create-formula-image-program 'dvisvgm)
+;; (setq org-latex-create-formula-image-program 'dvisvgm)

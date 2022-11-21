@@ -2,6 +2,15 @@
 import os
 import subprocess
 
+
+def get_version_of_currently_installed_emacs():
+    return subprocess\
+        .check_output(["emacs", "--version"])\
+        .decode("utf-8")\
+        .split("\n", maxsplit=1)[0]\
+        .split(" ")[2]
+
+
 # Define location of configuration files.
 XDG_CONFIG_HOME = os.environ["XDG_CONFIG_HOME"]
 
@@ -16,11 +25,7 @@ PATH_TO_MY_THEME = os.path.join(
 )
 
 # Determine version of currently present Emacs installation.
-EMACS_VERSION = subprocess\
-    .check_output(["emacs", "--version"])\
-    .decode("utf-8")\
-    .split("\n", maxsplit=1)[0]\
-    .split(" ")[2]
+EMACS_VERSION = get_version_of_currently_installed_emacs()
 # Determine path to currently present Emacs installation.
 PATH_TO_EMACS = os.path.join(
     XDG_CONFIG_HOME, "emacs", ".local", "straight", f"build-{EMACS_VERSION}"
@@ -30,11 +35,13 @@ PATH_TO_THEMES = os.path.join(PATH_TO_EMACS, "doom-themes")
 # Determine path to theme currently used by Emacs.
 PATH_TO_THEME = os.path.join(PATH_TO_THEMES, FILENAME_OF_EMACS_THEME)
 
-# Remove it, if it exists.
-try:
-    os.remove(PATH_TO_THEME)
-except FileNotFoundError:
-    pass
 
-# Link my personal/custom theme into Emacs Doom theme directory.
-os.symlink(PATH_TO_MY_THEME, PATH_TO_THEME)
+if __name__ == "__main__":
+    # Remove it, if it exists.
+    try:
+        os.remove(PATH_TO_THEME)
+    except FileNotFoundError:
+        pass
+
+    # Link my personal/custom theme into Emacs Doom theme directory.
+    os.symlink(PATH_TO_MY_THEME, PATH_TO_THEME)

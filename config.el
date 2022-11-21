@@ -201,6 +201,9 @@
      (push '("[-]" . "❍" ) prettify-symbols-alist)
      (prettify-symbols-mode)))
 
+;; Set inline-display-width for images to 1/3 of screen width.
+   (setq org-image-actual-width (/ (display-pixel-width) 3))
+
 ;; ╔══════════════════════════════════════════════════════════════════════════╗
 ;; ║                             ORG-MODE - AGENDA                            ║
 ;; ╚══════════════════════════════════════════════════════════════════════════╝
@@ -246,8 +249,8 @@
       "~/org/Projects/All Projects/edu - University/sem_06/Introduction to Computational Physics/CompPhys.org"
       "~/org/Projects/All Projects/edu - University/sem_08/Fundamentals of Simulation Methods/FSim.org"
       "~/org/Projects/All Projects/edu - University/sem_12/Computational Astrophysics/CompAstro.org"
-      "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Thesis/msc_thesis.org"
-      "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Oral Exam/msc_exam.org"
+      "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Thesis/msc-thesis.org"
+      "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Oral Exam/msc-exam.org"
       "~/org/Projects/All Projects/wrk - Tutor @PAP/PAP-Tutor.org"
       "~/org/Projects/Projects.org"
    )))
@@ -262,10 +265,6 @@
    (defvar terminal-notifier-command
      (executable-find "terminal-notifier") "The path to terminal-notifier.")
 ;; (setq exec-path (append '("/Users/vinc/bin" "/usr/local/bin" "/usr/local/sbin") exec-path))
-
-
-
-
 
 
 

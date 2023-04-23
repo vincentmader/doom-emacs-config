@@ -283,3 +283,8 @@
 ;;         ((yant/str-to-glyph "♲") org-specific "\\(?:^*+ +\\)\\(\\<HOLD\\>\\)" (org-mode) 1)
 ;;         ((yant/str-to-glyph "☠D") org-specific "\\<DEADLINE:" (org-mode))
 ;;         ((yant/str-to-glyph "◴S") org-specific "\\<SCHEDULED:" (org-mode))))))
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+
+;; (find-file "~/org/things/Things.org")

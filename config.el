@@ -63,6 +63,26 @@
 ;; - doom-one                                                   (default theme)
 ;; - doom-vibrant
 
+;; Configure transparency alpha-value for Emacs GUI application window.
+;; ────────────────────────────────────────────────────────────────────────────
+;; Set transparency to <active> & <inactive>
+   (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+   (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+;; Toggle transparency on `C-c t'
+   (defun toggle-transparency ()
+     (interactive)
+     (let ((alpha (frame-parameter nil 'alpha)))
+       (set-frame-parameter
+        nil 'alpha
+        (if (eql (cond ((numberp alpha) alpha)
+                       ((numberp (cdr alpha)) (cdr alpha))
+                       ;; Also handle undocumented (<active> <inactive>) form.
+                       ((numberp (cadr alpha)) (cadr alpha)))
+                 100)
+            '(85 . 50) '(100 . 100)))))
+   (global-set-key (kbd "C-c t") 'toggle-transparency)
+
 ;; Specify fonts.
 ;; ────────────────────────────────────────────────────────────────────────────
 ;; Doom exposes 5 (optional) variables for controlling fonts in Doom.
@@ -73,7 +93,7 @@
 ;;    (use this for presentations or streaming)
 ;; They all accept either a font-spec, font string ("Input Mono-12"),
 ;; or xlfd font string. You generally only need these two:
-   (setq doom-font (font-spec :family "Hack Nerd Font" :size 15))
+   (setq doom-font (font-spec :family "Hack Nerd Font" :size 14))
  ; (setq doom-font (font-spec :family "Hack Regular" :size 18))
  ; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light) doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
@@ -122,32 +142,47 @@
    (setq org-directory "~/org/")
 ;; Define path to some of my projects.
    (projectile-add-known-project "~/.config")
-   (projectile-add-known-project "~/org/Projects/All Projects/University")
-   (projectile-add-known-project "~/org/Projects/All Projects/mader.xyz")
+   (projectile-add-known-project "~/org/Projects/University")
+   (projectile-add-known-project "~/org/Projects/mader.xyz")
 
 ;; Define custom org to-do keywords.
 ;; ────────────────────────────────────────────────────────────────────────────
 ;; Specify collection of org-todo keywords.
    (after! org (setq org-todo-keywords '((sequence
        "TODO(t)"
+       "IDEA(i)"
        "NEXT(n)"
        "PROJ(p)"
+       "SIDE(s)"
+       "QUES(q)"
+       "MEET(m)"
+       "RCUR(r)"
+       "WAIT(w)"
+       "SDMB(b)"
        "|"
        "DONE(d)"
-       "WAIT(w)"
-       "SDMB(m)"
-       "HOLD(h)"
        "CANC(c)"
+       "HOLD(h)"
+       "ANSW(a)"
    ))))
 ;; Specify colors of org-todo keywords.
    (setq org-todo-keyword-faces '(
-       ("TODO" . "orange")
-       ("NEXT" . "#ae1703")
-       ("PROJ" . "#849902")
+       ;; ("TODO" . "#ae1703")
+       ("TODO" . "#ff6600")
+       ("NEXT" . "yellow")
+       ;; ("PROJ" . "#849902")
+       ;; ("PROJ" . "#217ebd")
+       ("PROJ" . "#798b09")
+       ("IDEA" . "#00aa33")
+       ("MEET" . "red")
+       ("RCUR" . "yellow")
        ("DONE" . "#3f5a62")
+       ("QUES" . "#798b09")
+       ("ANSW" . "#3f5a62")
+       ("SIDE" . "blue")
        ("WAIT" . "gray")
-       ("SDMB" . "gray")
-       ("HOLD" . "gray")
+       ("SDMB" . "#3f5a62")
+       ("HOLD" . "#3f5a62")
        ("CANC" . "#3f5a62")
    ))
 
@@ -173,6 +208,19 @@
    (setq org-superstar-headline-bullets-list
          '("◉" "○")) ; "⁖" "◉" "○" "✸" "✿"
 
+;; Specify colors of org-headings.
+;; ────────────────────────────────────────────────────────────────────────────
+   (custom-set-faces
+       '(org-level-1 ((t (:foreground "#247ebe" :bold t))))
+       '(org-level-2 ((t (:foreground "#306704" :bold t))))
+       '(org-level-3 ((t (:foreground "#247ebe" :bold t))))
+       '(org-level-4 ((t (:foreground "#306704" :bold t))))
+       '(org-level-5 ((t (:foreground "#247ebe" :bold t))))
+       '(org-level-6 ((t (:foreground "#306704" :bold t))))
+       '(org-level-7 ((t (:foreground "#247ebe" :bold t))))
+       '(org-level-8 ((t (:foreground "#306704" :bold t))))
+   )
+
 ;; Prettify checkbox symbols.
 ;; ────────────────────────────────────────────────────────────────────────────
 ;; Redefine symbols.
@@ -193,8 +241,13 @@
 ;; Specify appearance of agenda.
 ;; ────────────────────────────────────────────────────────────────────────────
 ;; Specify how many Days should be included in the Agenda.
-   (setq org-agenda-span 28)
-;;                    TODO ^ this is not doing anything atm
+   (setq org-agenda-span 14)
+
+;; Start the agenda today. (default: last Monday)
+   (setq org-agenda-start-day "+0d")
+ ; (setq org-agenda-start-on-weekday nil)
+ ; (setq org-agenda-inhibit-startup nil)
+ ; (setq org-agenda-dim-blocked-tasks nil)
 
 ;; Specify what files should be loaded into agenda.
 ;; ────────────────────────────────────────────────────────────────────────────
@@ -202,38 +255,40 @@
 ;;
 ;; NOTE: When adding something here, also add `#agenda` to the top of the file!
    (after! org (setq org-agenda-files '(
-      "~/org/Chores/Bureaucracy/Bureaucracy.org"
-      "~/org/Chores/Cooking/Cooking.org"
-      "~/org/Chores/Finances/Finances.org"
-      "~/org/Chores/Groceries/Groceries.org"
-      "~/org/Chores/Shopping/Shopping.org"
-      "~/org/Chores/Getting Things Done/GTD.org"
-      "~/org/Chores/Getting Things Done/Journal/People/People.org"
-      "~/org/Chores/Getting Things Done/Journal/Journal by Year/2022.org"
-      "~/org/Chores/Getting Things Done/Routines/Routines.org"
-      "~/org/Chores/Health/Health.org"
-      "~/org/Inbox/Inbox.org"
       "~/org/Index.org"
-      "~/org/Projects/All Projects/dev - auto-rice-scripts.nosync/DevEnv.org"
-      "~/org/Projects/All Projects/dev - chronos-stats/chronos.org"
-      "~/org/Projects/All Projects/dev - mader.xyz/mxyz.org"
-      "~/org/Projects/All Projects/dev - sono app/xwm.org"
-      "~/org/Projects/All Projects/msc - DPSG/Aktionen/DPSG-Aktionen.org"
-      "~/org/Projects/All Projects/msc - DPSG/DPSG Kirchheim/DPSG Kirchheim.org"
-      "~/org/Projects/All Projects/msc - DPSG/DPSG-Ebenen/DPSG-Ebenen.org"
-      "~/org/Projects/All Projects/msc - DPSG/DPSG.org"
-      "~/org/Projects/All Projects/msc - DPSG/Haus/DPSG-Haus.org"
-      "~/org/Projects/All Projects/msc - DPSG/Leitungs-Runde/DPSG-LR.org"
-      "~/org/Projects/All Projects/msc - DPSG/Pfadi-Stufe/DPSG-Pfadis.org"
-      "~/org/Projects/All Projects/msc - DPSG/Stammes-Vorstand/DPSG-StaVo.org"
-      "~/org/Projects/All Projects/msc - DPSG/Vereins-Vorsitz/DPSG-Verein.org"
-      "~/org/Projects/All Projects/edu - University/University.org"
-      ;; "~/org/Projects/All Projects/edu - University/sem_06/Introduction to Computational Physics/CompPhys.org"
-      ;; "~/org/Projects/All Projects/edu - University/sem_08/Fundamentals of Simulation Methods/FSim.org"
-      ;; "~/org/Projects/All Projects/edu - University/sem_12/Computational Astrophysics/CompAstro.org"
-      "~/org/Projects/All Projects/edu - University/sem_13/M.Sc. Oral Exam/msc-exam.org"
-      "~/org/Projects/All Projects/wrk - Tutor @PAP/PAP-Tutor.org"
+      "~/org/Inbox/Inbox.org"
+      "~/org/Projects/All/Develop the sono app./xwm.org"
+      ;; "~/org/Projects/All/Development/auto-rice-scripts.nosync/DevEnv.org"
+      ;; "~/org/Projects/All/Development/chronos-stats/chronos.org"
+      ;; "~/org/Projects/All/Development/mader.xyz/mxyz.org"
+      ;; "~/org/Projects/All/education/University/University.org"
+      ;; "~/org/Projects/All/education/University/sem_13/M.Sc. Oral Exam/msc-exam.org"
+      ;;
+      "~/org/Projects/All/DPSG/Aktionen/DPSG-Aktionen.org"
+      "~/org/Projects/All/DPSG/DPSG Kirchheim/DPSG Kirchheim.org"
+      "~/org/Projects/All/DPSG/DPSG-Ebenen/DPSG-Ebenen.org"
+      "~/org/Projects/All/DPSG/DPSG.org"
+      "~/org/Projects/All/DPSG/Haus/DPSG-Haus.org"
+      "~/org/Projects/All/DPSG/Leitungs-Runde/DPSG-LR.org"
+      ;; "~/org/Projects/All/DPSG/Pfadi-Stufe/DPSG-Pfadis.org"
+      "~/org/Projects/All/DPSG/Stammes-Vorstand/DPSG-StaVo.org"
+      "~/org/Projects/All/DPSG/Vereins-Vorsitz/DPSG-Verein.org"
+      "~/org/Projects/All/Work as Tutor @PAP./PAP-Tutor.org"
+      "~/org/Projects/All/Work as Tutor @Nachhilfe./Nachhilfe.org"
+      "~/org/Projects/All/Work as Aushilfe @gastroevents./GastroEvents.org"
       "~/org/Projects/Projects.org"
+      "~/org/Projects/Chores/Bureaucracy/Bureaucracy.org"
+      "~/org/Projects/Chores/Cooking/Cooking.org"
+      "~/org/Projects/Chores/Finances/Finances.org"
+      "~/org/Projects/Chores/Groceries/Groceries.org"
+      "~/org/Projects/Chores/Shopping/Shopping.org"
+      "~/org/Projects/Getting Things Done/GTD.org"
+      "~/org/Projects/Getting Things Done/Journal/People/People.org"
+      "~/org/Projects/Getting Things Done/Journal/Journal by Year/2022.org"
+      "~/org/Projects/Getting Things Done/Journal/Journal by Year/2023.org"
+      "~/org/Projects/Getting Things Done/Routines/Routines.org"
+      "~/org/Projects/Chores/Health/Health.org"
+      "~/org/Projects/Chores/Home/Home.org"
    )))
 
 ;; ╔══════════════════════════════════════════════════════════════════════════╗
@@ -337,13 +392,6 @@
 
 
 
-
-
-;; start the agenda today (default: last Monday)
-;; (setq org-agenda-start-day "+0d")
-;; (setq org-agenda-start-on-weekday nil)
-;; (setq org-agenda-inhibit-startup nil)
-;; (setq org-agenda-dim-blocked-tasks nil)
 
 ;; ;; Set default column view headings: Task Total-Time Time-Stamp
 ;; (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
@@ -557,3 +605,65 @@
 ;       org-latex-pdf-process
 ;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 ;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+
+
+(add-hook 'org-clock-in-hook (lambda () (call-process "/usr/bin/osascript" nil 0 nil "-e" (concat "tell application \"org-clock-statusbar\" to clock in \"" (replace-regexp-in-string "\"" "\\\\\"" org-clock-current-task) "\""))))
+(add-hook 'org-clock-out-hook (lambda () (call-process "/usr/bin/osascript" nil 0 nil "-e" "tell application \"org-clock-statusbar\" to clock out")))
+
+
+
+
+
+
+
+
+
+(setq org-latex-toc-command "\\clearpage \\tableofcontents")
+;; (setq org-latex-toc-command "\\clearpage \\tableofcontents \\clearpage")
+
+
+
+
+;; ;; specify the justification you want
+;; (plist-put org-format-latex-options :justify 'center)
+
+;; (defun org-justify-fragment-overlay (beg end image imagetype)
+;;   "Adjust the justification of a LaTeX fragment.
+;; The justification is set by :justify in
+;; `org-format-latex-options'. Only equations at the beginning of a
+;; line are justified."
+;;   (cond
+;;    ;; Centered justification
+;;    ((and (eq 'center (plist-get org-format-latex-options :justify))
+;;          (= beg (line-beginning-position)))
+;;     (let* ((img (create-image image 'imagemagick t))
+;;            (width (car (image-size img)))
+;;            (offset (floor (- (/ (window-text-width) 2) (/ width 2)))))
+;;       (overlay-put (ov-at) 'before-string (make-string offset ? ))))
+;;    ;; Right justification
+;;    ((and (eq 'right (plist-get org-format-latex-options :justify))
+;;          (= beg (line-beginning-position)))
+;;     (let* ((img (create-image image 'imagemagick t))
+;;            (width (car (image-display-size (overlay-get (ov-at) 'display))))
+;;            (offset (floor (- (window-text-width) width (- (line-end-position) end)))))
+;;       (overlay-put (ov-at) 'before-string (make-string offset ? ))))))
+
+;; (defun org-latex-fragment-tooltip (beg end image imagetype)
+;;   "Add the fragment tooltip to the overlay and set click function to toggle it."
+;;   (overlay-put (ov-at) 'help-echo
+;;                (concat (buffer-substring beg end)
+;;                        "mouse-1 to toggle."))
+;;   (overlay-put (ov-at) 'local-map (let ((map (make-sparse-keymap)))
+;;                                     (define-key map [mouse-1]
+;;                                       `(lambda ()
+;;                                          (interactive)
+;;                                          (org-remove-latex-fragment-image-overlays ,beg ,end)))
+;;                                     map)))
+
+;; ;; advise the function to a
+;; (advice-add 'org--format-latex-make-overlay :after 'org-justify-fragment-overlay)
+;; (advice-add 'org--format-latex-make-overlay :after 'org-latex-fragment-tooltip)
+;; ;; If you get tired of the advice, remove it like this:
+;; ;; (advice-remove 'org--format-latex-make-overlay 'org-justify-fragment-overlay)
+;; ;; (advice-remove 'org--format-latex-make-overlay 'org-latex-fragment-tooltip)

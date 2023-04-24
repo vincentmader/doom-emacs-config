@@ -157,12 +157,12 @@
        "QUES(q)"
        "MEET(m)"
        "RCUR(r)"
-       "WAIT(w)"
        "SDMB(b)"
        "|"
        "DONE(d)"
        "CANC(c)"
        "HOLD(h)"
+       "WAIT(w)"
        "ANSW(a)"
    ))))
 ;; Specify colors of org-todo keywords.

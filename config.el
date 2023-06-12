@@ -151,38 +151,34 @@
    (after! org (setq org-todo-keywords '((sequence
        "TODO(t)"
        "IDEA(i)"
-       "NEXT(n)"
        "PROJ(p)"
        "SIDE(s)"
        "QUES(q)"
        "MEET(m)"
-       "RCUR(r)"
        "SDMB(b)"
+       "WAIT(w)"
        "|"
        "DONE(d)"
        "CANC(c)"
        "HOLD(h)"
-       "WAIT(w)"
        "ANSW(a)"
    ))))
 ;; Specify colors of org-todo keywords.
    (setq org-todo-keyword-faces '(
        ;; ("TODO" . "#ae1703")
        ("TODO" . "#ff6600")
-       ("NEXT" . "yellow")
        ;; ("PROJ" . "#849902")
        ;; ("PROJ" . "#217ebd")
        ("PROJ" . "#798b09")
        ("IDEA" . "#00aa33")
        ("MEET" . "red")
-       ("RCUR" . "yellow")
        ("DONE" . "#3f5a62")
        ("QUES" . "#798b09")
        ("ANSW" . "#3f5a62")
        ("SIDE" . "blue")
-       ("WAIT" . "gray")
+       ("WAIT" . "#3f5a62")
        ("SDMB" . "#3f5a62")
-       ("HOLD" . "#3f5a62")
+       ("HOLD" . "#888888")
        ("CANC" . "#3f5a62")
    ))
 

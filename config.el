@@ -30,4 +30,4 @@
 (load-file ( format "%s/doom/lisp/org-agenda.el"        PATH_TO_CONF ))
 (load-file ( format "%s/doom/lisp/org-latex.el"         PATH_TO_CONF ))
 (load-file ( format "%s/doom/lisp/org-notifications.el" PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/org-statusbar.el" PATH_TO_CONF ))
+(load-file ( format "%s/doom/lisp/org-statusbar.el"     PATH_TO_CONF ))

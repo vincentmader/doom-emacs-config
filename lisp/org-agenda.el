@@ -1,27 +1,30 @@
-;; ╔══════════════════════════════════════════════════════════════════════════╗
-;; ║                             ORG-MODE - AGENDA                            ║
-;; ╚══════════════════════════════════════════════════════════════════════════╝
+; ╔═══════════════════════════════════════════════════════════════════════════╗
+; ║                              ORG-MODE - AGENDA                            ║
+; ╚═══════════════════════════════════════════════════════════════════════════╝
 
-;; Specify appearance of agenda.
-;; ────────────────────────────────────────────────────────────────────────────
-;; Specify how many Days should be included in the Agenda.
+; Specify appearance of agenda.                                             {{{
+; ─────────────────────────────────────────────────────────────────────────────
+
+; Specify how many Days should be included in the Agenda.
    (setq org-agenda-span 14)
 
-;; Start the agenda today. (default: last Monday)
+; Start the agenda today. (default: last Monday)
    (setq org-agenda-start-day "+0d")
  ; (setq org-agenda-start-on-weekday nil)
  ; (setq org-agenda-inhibit-startup nil)
  ; (setq org-agenda-dim-blocked-tasks nil)
 
-;; Specify what files should be loaded into agenda.
-;; ────────────────────────────────────────────────────────────────────────────
-;; Define list of agenda-files.
+; }}}
+; Specify what files should be loaded into agenda.                          {{{
+; ─────────────────────────────────────────────────────────────────────────────
+
+; Define list of agenda-files.
    (after! org (setq org-agenda-files '(
         "~/org/Index.org"
         "~/org/0_inbox/Inbox.org"
-;; NOTE: Do NOT delete the "MARKER..." lines.
-;; They are used in my "make-org-agenda" repo to auto-generate the list below.
-;; MARKER_START_ORG_AGENDA_FILE_LIST
+; NOTE: Do NOT delete the "MARKER..." lines.
+; They are used in my "make-org-agenda" repo to auto-generate the list below.
+; MARKER_START_ORG_AGENDA_FILE_LIST
        "/Users/vinc/org/1_active-main-projects/configure_unix_system/Configure UNIX system.org"
        "/Users/vinc/org/1_active-main-projects/plan_festival_visit_to_southside_2023/Plan festival visit to SouthSide 2023.org"
        "/Users/vinc/org/1_active-main-projects/plan_vacation_to_france_2023/Plan vacation to France 2023.org"
@@ -86,5 +89,7 @@
        "/Users/vinc/org/2_active-side-projects/develop_simulations_from_computational_physics/Develop simulations from computational physics.org"
        "/Users/vinc/org/2_active-side-projects/keep_track_of_finances/Keep track of Finances.org"
        "/Users/vinc/org/2_active-side-projects/keep_track_of_chores/Keep track of Chores.org"
-;; MARKER_END_ORG_AGENDA_FILE_LIST
+; MARKER_END_ORG_AGENDA_FILE_LIST
    )))
+
+; }}}

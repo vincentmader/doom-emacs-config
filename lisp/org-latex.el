@@ -1,28 +1,36 @@
-;; ╔══════════════════════════════════════════════════════════════════════════╗
-;; ║                            ORG-MODE - LaTeX                              ║
-;; ╚══════════════════════════════════════════════════════════════════════════╝
+; ╔═══════════════════════════════════════════════════════════════════════════╗
+; ║                             ORG-MODE - LaTeX                              ║
+; ╚═══════════════════════════════════════════════════════════════════════════╝
 
-;; Configure LaTeX fragment-preview.
-;; ────────────────────────────────────────────────────────────────────────────
-;; Increase fragment snize.
+; Configure LaTeX fragment-preview.                                         {{{
+; ─────────────────────────────────────────────────────────────────────────────
+
+; Increase fragment snize.
    (after! org (plist-put org-format-latex-options :scale 1.5))
-;; Configure fragment colors.
+
+; Configure fragment colors.
    (add-to-list 'default-frame-alist '(background-color . "#000000"))
    (add-to-list 'default-frame-alist '(foreground-color . "#FFFFFF"))
-;;                                     TODO ^ not working (e.g. foreground red)
+;                                     TODO ^ not working (e.g. foreground red)
 
-;; Configure LaTeX snippet-preview on macOS.
-;; ────────────────────────────────────────────────────────────────────────────
+; }}}
+; Configure LaTeX snippet-preview on macOS.                                 {{{
+; ─────────────────────────────────────────────────────────────────────────────
+
    (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
    (setq exec-path (append '("/Library/TeX/texbin") exec-path))
 
-;; Configure usage of `dvisvg' instead of `dvipng'.
-;; ────────────────────────────────────────────────────────────────────────────
-;; (setq org-latex-create-formula-image-program 'dvisvgm)  ; <- obsolete
-;; (setq org-preview-latex-default-process 'dvisvgm)       ; <- use instead
+; }}}
+; Configure usage of `dvisvg' instead of `dvipng'. (INACTIVE)               {{{ 
+; ─────────────────────────────────────────────────────────────────────────────
 
-;; Configure LaTeX snippet-preview on macOS.
-;; ────────────────────────────────────────────────────────────────────────────
+; (setq org-latex-create-formula-image-program 'dvisvgm)  ; <- obsolete
+; (setq org-preview-latex-default-process 'dvisvgm)       ; <- use instead
+
+; }}}
+; Configure LaTeX snippet-preview on macOS.                                 {{{  
+; ─────────────────────────────────────────────────────────────────────────────
+
 (setq org-preview-latex-process-alist '(
       ;; (dvisvgm
       ;;  :programs ("latex" "dvisvgm")
@@ -73,9 +81,13 @@
       ;;  :latex-compiler ("pdflatex -interaction nonstopmode -output-directory %o %f")
       ;;  :image-converter ("convert -bordercolor white -border 10 -density %D -trim -antialias %f -quality 100 %O"))
 ))
-;; re: dvipng options, see here:
-;;     -> https://www.nongnu.org/dvipng/dvipng_4.html
 
+; re: dvipng options, see here:
+;     -> https://www.nongnu.org/dvipng/dvipng_4.html
 
+; }}}
+; Configure table of contents to be displayed on new page.                  {{{  
+; ─────────────────────────────────────────────────────────────────────────────
 (setq org-latex-toc-command "\\clearpage \\tableofcontents")
-;; (setq org-latex-toc-command "\\clearpage \\tableofcontents \\clearpage")
+; (setq org-latex-toc-command "\\clearpage \\tableofcontents \\clearpage")
+; }}}

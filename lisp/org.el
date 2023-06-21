@@ -1,19 +1,23 @@
-;; ╔══════════════════════════════════════════════════════════════════════════╗
-;; ║                            EMACS - ORG-MODE                              ║
-;; ╚══════════════════════════════════════════════════════════════════════════╝
+; ╔═══════════════════════════════════════════════════════════════════════════╗
+; ║                             EMACS - ORG-MODE                              ║
+; ╚═══════════════════════════════════════════════════════════════════════════╝
 
-;; Setup location of org on disk.
-;; ────────────────────────────────────────────────────────────────────────────
-;; Define path to org-files.                (sym-link in home-dir to elsewhere)
+; Setup location of org on disk.                                            {{{
+; ─────────────────────────────────────────────────────────────────────────────
+
+; Define path to org-files.                (sym-link in home-dir to elsewhere)
    (setq org-directory "~/org/")
-;; Define path to some of my projects.
+
+; Define path to some of my projects.
    (projectile-add-known-project "~/.config")
    (projectile-add-known-project "~/org/Projects/University")
    (projectile-add-known-project "~/org/Projects/mader.xyz")
 
-;; Define custom org to-do keywords.
-;; ────────────────────────────────────────────────────────────────────────────
-;; Specify collection of org-todo keywords.
+; }}}
+; Define custom org to-do keywords.                                         {{{
+; ─────────────────────────────────────────────────────────────────────────────
+
+; Specify collection of org-todo keywords.
    (after! org (setq org-todo-keywords '((sequence
        "TODO(t)"
        "IDEA(i)"
@@ -29,7 +33,8 @@
        "HOLD(h)"
        "ANSW(a)"
    ))))
-;; Specify colors of org-todo keywords.
+
+; Specify colors of org-todo keywords.
    (setq org-todo-keyword-faces '(
        ;; ("TODO" . "#ae1703")
        ("TODO" . "#ff6600")
@@ -48,10 +53,14 @@
        ("CANC" . "#3f5a62")
    ))
 
-;; Setup Emacs' journaling functionality.
-;; ────────────────────────────────────────────────────────────────────────────
-;; Define org-journal template.                           NOTE: not used a.t.m.
+; }}}
+; Setup Emacs' journaling functionality.                                    {{{
+; ─────────────────────────────────────────────────────────────────────────────
+
+; Define org-journal template.                           NOTE: not used a.t.m.
    (setq org-journal-date-prefix "#+title: "
          org-journal-time-prefix "* "
          org-journal-date-format "%A, %B %d. %Y"
          org-journal-file-format "%Y-%m-%d.org")
+
+; }}}

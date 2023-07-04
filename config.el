@@ -18,16 +18,17 @@
 ;; they are implemented.
 
 (defvar PATH_TO_HOME ( getenv "HOME" ))
-(defvar PATH_TO_CONF ( format "%s/.config" PATH_TO_HOME ))
+(defvar PATH_TO_CONF ( format "%s/.config"          PATH_TO_HOME ))
+(defvar PATH_TO_DOOM ( format "%s/emacs-doom"       PATH_TO_CONF ))
 
-(load-file ( format "%s/doom/lisp/general.el"           PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/appearance.el"        PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/navigation.el"        PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/jupyter.el"           PATH_TO_CONF ))
+(load-file ( format "%s/lisp/general.el"            PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/appearance.el"         PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/navigation.el"         PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/jupyter.el"            PATH_TO_DOOM ))
 
-(load-file ( format "%s/doom/lisp/org.el"               PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/org-appearance.el"    PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/org-agenda.el"        PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/org-latex.el"         PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/org-notifications.el" PATH_TO_CONF ))
-(load-file ( format "%s/doom/lisp/org-statusbar.el"     PATH_TO_CONF ))
+(load-file ( format "%s/lisp/org.el"                PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/org-appearance.el"     PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/org-agenda.el"         PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/org-latex.el"          PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/org-notifications.el"  PATH_TO_DOOM ))
+(load-file ( format "%s/lisp/org-statusbar.el"      PATH_TO_DOOM ))

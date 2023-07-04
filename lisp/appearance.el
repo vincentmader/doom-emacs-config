@@ -6,7 +6,7 @@
 ; ─────────────────────────────────────────────────────────────────────────────
 
 ; Add background image for startup dashboard.
-  (setq fancy-splash-image ( format "%s/doom/media/black-hole.png" PATH_TO_CONF ))
+  (setq fancy-splash-image ( format "%s/media/black-hole.png" PATH_TO_DOOM ))
 
 ; Specify what widgets to show on startup dashboard.
   (setq +doom-dashboard-functions

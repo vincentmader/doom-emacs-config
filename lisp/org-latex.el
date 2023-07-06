@@ -54,25 +54,17 @@
     ;;  :transparent-image-converter ("dvipng -D %D -T tight -bg Transparent -o %O %f -bd 100"))
 
     (dvipng
-     :programs
-     ("latex" "dvipng")
-     :description
-     "dvi > png"
-     :message
-     "you need to install the programs: latex and dvipng."
-     :image-input-type
-     "dvi"
-     :image-output-type
-     "png"
-     :image-size-adjust
-     (1.0 . 1.0)
-     :latex-compiler
-     ("latex -interaction nonstopmode -output-directory %o %f")
-     :image-converter ;; <- this one is used at the moment
-     ("dvipng -D %D -T tight -o %O %f")
+     :programs ("latex" "dvipng")
+     :description "dvi > png"
+     :message "you need to install the programs: latex and dvipng."
+     :image-input-type "dvi"
+     :image-output-type "png"
+     :image-size-adjust (1.0 . 1.0)
+     :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
+     :image-converter ("dvipng -D %D -T tight -o %O %f")
+     ;; ^ this one is used at the moment
      ;; ("dvipng -D %D -T tight -o %O %f -bd '1 white'")  ;; <- border is not working
-     :transparent-image-converter
-     ("dvipng -D %D -T tight -o %O %f -bg Transparent"))
+     :transparent-image-converter ("dvipng -D %D -T tight -o %O %f -bg Transparent"))
 
     ;; (imagemagick
     ;;  :programs ("latex" "convert")

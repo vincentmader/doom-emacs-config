@@ -41,6 +41,7 @@
     ;;  :image-size-adjust (1.7 . 1.5)
     ;;  :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
     ;;  :image-converter ("dvisvgm %f -n -b min -c %S -o %O"))
+
     ;; (dvipng
     ;;  :programs ("latex" "dvipng")
     ;;  :description "dvi > png"
@@ -51,6 +52,7 @@
     ;;  :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
     ;;  :image-converter ("dvipng -D %D -T tight -o %O %f -bd 100")
     ;;  :transparent-image-converter ("dvipng -D %D -T tight -bg Transparent -o %O %f -bd 100"))
+
     (dvipng
      :programs
      ("latex" "dvipng")
@@ -71,6 +73,7 @@
      ;; ("dvipng -D %D -T tight -o %O %f -bd '1 white'")  ;; <- border is not working
      :transparent-image-converter
      ("dvipng -D %D -T tight -o %O %f -bg Transparent"))
+
     ;; (imagemagick
     ;;  :programs ("latex" "convert")
     ;;  :description "pdf > png"

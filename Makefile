@@ -1,7 +1,9 @@
-all:
+setup:
 	make custom_theme
 	make doom_sync
-doom_sync:
-	$(XDG_CONFIG_HOME)/emacs/bin/doom sync
+start_server:
+	cd bin && ./start_emacs_server.sh
 custom_theme:
-	./scripts/setup_custom_theme.sh
+	cd bin && ./setup_custom_theme.sh
+doom_sync:
+	cd $(XDG_CONFIG_HOME)/emacs/bin && ./doom sync

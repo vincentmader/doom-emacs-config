@@ -198,7 +198,6 @@
 
 
 
-;; (setq fancy-splash-image "~/.doom.d/black-hole.png")
 
 ; -----------------------------------------------------------------------------
 ; (require 'package)

@@ -42,6 +42,18 @@
     ;;  :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
     ;;  :image-converter ("dvisvgm %f -n -b min -c %S -o %O"))
 
+    ;; (dvisvgm
+    ;;  :programs ("latex" "dvisvgm" "gs")
+    ;;  :document "Compile a LaTeX fragment file to a dvi file, then convert
+    ;;             the dvi file to svg file using dvisvgm program."
+    ;;  :message "you need to install programs: latex, dvisvgm and ghostscript."
+    ;;  :use-xcolor t
+    ;;  :image-input-type "dvi"
+    ;;  :image-output-type "svg"
+    ;;  :image-size-adjust (1.7 . 1.5)
+    ;;  :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
+    ;;  :image-converter ("dvisvgm %f -n -b min -c %S -o %b.svg"))
+
     ;; (dvipng
     ;;  :programs ("latex" "dvipng")
     ;;  :description "dvi > png"

@@ -29,7 +29,7 @@
       "WAIT(w)"
       "|"
       "DONE(d)"
-      "CANC(c)"
+      "CNCL(c)"
       "HOLD(h)"
       "ANSW(a)"
   ))))
@@ -50,7 +50,7 @@
       ("WAIT" . "#3f5a62")
       ("SDMB" . "#3f5a62")
       ("HOLD" . "#888888")
-      ("CANC" . "#3f5a62")
+      ("CNCL" . "#3f5a62")
   ))
 
 ; }}}

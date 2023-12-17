@@ -1,7 +1,7 @@
 setup:
 	make custom_theme
 	make doom_sync
-start_server:
+server:
 	cd bin && ./start_emacs_server.sh
 custom_theme:
 	cd bin && ./setup_custom_theme.sh
